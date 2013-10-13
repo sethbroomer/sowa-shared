@@ -18,4 +18,6 @@ shared.config = {
     view   : require('./config/config-views')
 };
 
+shared.nconf = require('nconf');
+
 module.exports = shared;
