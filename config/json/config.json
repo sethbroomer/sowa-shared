@@ -1,0 +1,27 @@
+{
+    "env": "development",
+    "node_port": "3000",
+    "services" : {
+        "defaults": {
+            "url" : "http://local.m.servername.com/test-data"
+        },
+        "search" : {
+            "url" : "http://local.m.servername.com/test-data"
+        }
+    },
+    "logging" : {
+        "log_level": "DEBUG",
+        "log_config":  {
+            "appenders": [
+                {
+                    "type": "file",
+                    "filename": "/data/node-app/search.log",
+                    "category": "node-search"
+                },
+                {
+                    "type": "console"
+                }
+            ]
+        }
+    }
+}

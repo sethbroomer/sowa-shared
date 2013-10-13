@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+
+    <head>
+        {{> layout/desktop/meta}}
+        {{> layout/desktop/css}}
+        {{> layout/desktop/head-javascript}}
+    </head>
+    <body>
+        {{{body}}}
+
+        {{> layout/desktop/javascripts}}
+
+        {{> javascripts/javascripts}}
+
+
+  {{#if templates}}
+    <script>
+        (function () {
+            var template  = Handlebars.template,
+                templates = Handlebars.templates = Handlebars.templates || {};
+
+          {{#templates}}
+            templates['{{{name}}}'] = template({{{template}}});
+          {{/templates}}
+        }());
+    </script>
+  {{/if}}
+
+    </body>
+</html>
