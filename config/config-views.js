@@ -5,10 +5,11 @@ var configureViewApp = function(app) {
         hbs;
 
     hbs = exphbs.create({
-        defaultLayout   : 'main',
-        precompiled     : true,
-        layoutsDir      : 'views/layouts/',
-        partialsDir     : 'views/templates/'
+        defaultLayout     : 'main',
+        precompiled       : true,
+        layoutsDir        : __dirname + '/../views/layouts/',
+        sharedPartialsDir : __dirname + '/../views/partials/',
+        partialsDir       : 'views/templates/'
     });
 
     app.set('hbs',hbs);
@@ -18,6 +19,6 @@ var configureViewApp = function(app) {
     app.set('view engine', 'handlebars');
 };
 
-exports.configureView = function(app) {
+exports.initialize = function(app) {
     configureViewApp(app);
 };

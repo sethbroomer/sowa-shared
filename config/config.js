@@ -8,9 +8,15 @@ var nconf   = require('nconf'),
 
 
 function loadConfig(app) {
-    var configFile = './config/json/config.json';
-    
-    nconf.argv().env().file({file: configFile});
+    var configFile  = './config/json/config.json',
+        argvOptions = {
+            'c' : {
+                alias : 'config',
+                describe : 'path to app config json file'
+            }
+        };
+
+    nconf.argv(argvOptions).env().file({file: configFile});
 
     app.set('env', nconf.get('env') || 'development');
 }
@@ -28,14 +34,14 @@ module.exports = function(app, express, rootPath) {
     loadConfig(app);
 
     //config routers
-    routers.configRouters(app, rootPath + '/routers');
+    routers.initialize(app, rootPath + '/routers');
 
     // View Settings (Handlebars)
     app.set('view engine', 'hbs');
 
 
     //config views
-    views.configureView(app);
+    views.initialize(app);
 
 
     // This should always be the LAST line of config

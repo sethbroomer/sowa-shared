@@ -35,7 +35,7 @@ var readdirSyncRecursiveForRoute = function(app, path) {
 };
 
 
-exports.configRouters = function(app, path) {
+exports.initialize = function(app, path) {
     defaultRouters(app);
     readdirSyncRecursiveForRoute(app, path);
 };
