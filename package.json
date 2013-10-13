@@ -28,5 +28,9 @@
   "scripts": {
     "test": "make test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sethbroomer/webservice-shared.git"
+  },  
   "readmeFilename": "README.md"
 }
