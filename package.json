@@ -1,36 +1,34 @@
 {
-  "name": "webservice-shared",
-  "description": "Webservice shared repo",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "express": "3.4.0",
-    "underscore": "1.5.2",
-    "express3-handlebars": "0.5.0",
-    "request" : "2.27.0",
-    "backbone": "1.1.0",
-    "nconf": "0.6.7",
-    "log4js": "0.6.9"
-  },
-  "devDependencies": {
-    "mocha": "*",
-    "should": "*",
-    "colors": "*",
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.6.4",
-    "grunt-cafe-mocha": "~0.1.9"
-  },
-  "engines": {
-    "node": "0.10.x",
-    "npm": "1.2.x"
-  },
-  "main": "app.js",
-  "scripts": {
-    "test": "make test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/sethbroomer/webservice-shared.git"
-  },  
-  "readmeFilename": "README.md"
+    "name": "webservice-shared",
+    "description": "Webservice shared repo",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "express": "3.4.0",
+        "underscore": "1.5.2",
+        "express3-handlebars": "git://github.com/sethbroomer/express3-handlebars.git#master",
+        "request" : "2.27.0",
+        "backbone": "1.1.0",
+        "nconf": "0.6.7",
+        "log4js": "0.6.9"
+    },
+    "devDependencies": {
+        "mocha": "*",
+        "should": "*",
+        "colors": "*",
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "~0.6.4",
+        "grunt-cafe-mocha": "~0.1.9"
+    },
+    "engines": {
+        "node": "0.10.x",
+        "npm": "1.2.x"
+    },
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url" : "git://github.com/sethbroomer/webservice-shared.git"
+    },
+
+    "readmeFilename": "README.md"
 }
