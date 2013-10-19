@@ -1,6 +1,6 @@
 {
-    "name": "webservice-shared",
-    "description": "Webservice shared repo",
+    "name": "sowa-shared",
+    "description": "sowa shared repo",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -27,7 +27,7 @@
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url" : "git://github.com/sethbroomer/webservice-shared.git"
+        "url" : "git://github.com/sethbroomer/sowa-shared.git"
     },
 
     "readmeFilename": "README.md"
