@@ -1,6 +1,8 @@
 'use strict';
 
-var util = require('util');
+var util  = require('util'),
+    nconf = require('nconf');
+
 
 module.exports  = {
     exposeTemplates: function(req, res, next) {
@@ -43,6 +45,13 @@ module.exports  = {
                 res.json(200, args.pop());
 
             } else {
+
+                for(var i =0; i < args.length; i++) {
+                    if(typeof args[i] === 'object' && Object.prototype.toString.call(args[i]) === "[object Object]") {
+                        args[i]._app = nconf.get('app_name');
+                    }
+                }
+
                 this.render.apply(this,args);
             }
         };
