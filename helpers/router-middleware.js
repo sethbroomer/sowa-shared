@@ -4,6 +4,12 @@ var util  = require('util'),
     nconf = require('nconf');
 
 
+var addConfigForTemplateObject = function(obj) {
+    obj._app = nconf.get('app_name');
+    return obj;
+
+};
+
 module.exports  = {
     exposeTemplates: function(req, res, next) {
         var app          = req.app;
@@ -45,11 +51,16 @@ module.exports  = {
                 res.json(200, args.pop());
 
             } else {
-
+                //add configuration varaibles that are needed in the templates
                 for(var i =0; i < args.length; i++) {
                     if(typeof args[i] === 'object' && Object.prototype.toString.call(args[i]) === "[object Object]") {
-                        args[i]._app = nconf.get('app_name');
+                        args[i] = addConfigForTemplateObject(args[i]);
                     }
+                }
+
+                //if its a ajax request and we are requesting a tile then use the partial instead of the full tile
+                if(res.req.headers['x-requested-with'] === 'XMLHttpRequest' && res.req.headers['x-request-type'] === 'tile') {
+                    args[0] = 'templates/'  + args[0];
                 }
 
                 this.render.apply(this,args);
