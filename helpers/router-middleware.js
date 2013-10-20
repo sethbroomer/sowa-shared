@@ -6,6 +6,7 @@ var util  = require('util'),
 
 var addConfigForTemplateObject = function(obj) {
     obj._app = nconf.get('app_name');
+    obj._staticUrl = nconf.get('static_url');
     return obj;
 
 };
