@@ -6,7 +6,7 @@
     "dependencies": {
         "express": "3.4.0",
         "underscore": "1.5.2",
-        "express3-handlebars": "git://github.com/sethbroomer/express3-handlebars.git#master",
+        "express3-handlebars": "0.5.0",
         "request" : "2.27.0",
         "backbone": "1.1.0",
         "nconf": "0.6.7",
