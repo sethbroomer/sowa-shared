@@ -1,12 +1,4 @@
-<!doctype html>
-<html>
-
-    <head>
-        {{> layout/desktop/meta}}
         {{> layout/desktop/css}}
-        {{> layout/desktop/head-javascript}}
-    </head>
-    <body>
         {{{body}}}
 
         {{> layout/desktop/javascripts}}
@@ -26,12 +18,3 @@
         }());
     </script>
   {{/if}}
-
-    <script>
-        $( document ).ready(function() {
-            SOWA.ScriptManager.registerScripts();
-        });
-    </script>
-
-    </body>
-</html>

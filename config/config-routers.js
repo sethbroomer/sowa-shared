@@ -8,10 +8,10 @@ var defaultRouters = function(app) {
 
     app.get('/*', baseRouter.extendExpress3HandlebarRender, baseRouter.exposeTemplates, function(req,res,next){
         if(res.req.headers['x-requested-with'] === 'XMLHttpRequest') {
-            res.locals.layout=false;
+            res.locals.responseType = 'json';
 
-            if(res.req.headers['x-request-type'] !== 'tile') {
-                res.locals.responseType = 'json';
+            if(res.req.headers['x-request-type'] === 'tile' || res.req.headers['x-request-type'] === 'page') {
+                res.locals.responseType = 'html';
             }
         }
 

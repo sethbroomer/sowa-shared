@@ -8,8 +8,8 @@ var configureViewApp = function(app) {
         defaultLayout     : 'main',
         precompiled       : true,
         layoutsDir        : __dirname + '/../views/layouts/',
-        sharedPartialsDir : __dirname + '/../views/partials/',
-        partialsDir       : 'views/templates/'
+        partialsDir       : [ __dirname + '/../views/partials/',
+                                'views/templates/']
     });
 
     app.set('hbs',hbs);
