@@ -4,8 +4,7 @@
     SOWA.ScriptManager = SOWA.ScriptManager || {};
 
     var SCRIPT_PATTERN = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/g,
-        SRC_PATTERN    = /<script.*?src ?= ?"([^"]+)"/,
-        ID_PATTERN     = /<script.*?id ?= ?"([^"]+)"/;
+        SRC_PATTERN    = /<script.*?src ?= ?"([^"]+)"/;
 
     SOWA.ScriptManager = {
         processedScripts: [],
@@ -27,7 +26,7 @@
         },
         processScripts: function(data, next) {
             //remove any scripts that are currently in the manager
-            var response =  this._removeDuplicateScripts(data);
+           var response =  this._removeDuplicateScripts(data);
 
             this._loadNewScripts(response.scripts, response.data, next);
 
@@ -40,33 +39,22 @@
          * @private
          */
         _removeDuplicateScripts: function(data) {
-            var list        = data.match(SCRIPT_PATTERN),
-                scripts     = [],
-                scriptArray = [],
+            var list              = data.match(SCRIPT_PATTERN),
+                scripts           = [],
+                scriptArray       = [],
                 script;
 
             if(list && list.length){
                 for(var i = 0; i < list.length; i++) {
-                    scriptArray = list[i].match(SRC_PATTERN);
+                    scriptArray     = list[i].match(SRC_PATTERN);
 
                     if(scriptArray && scriptArray.length >=2) {
                         script = scriptArray[1].replace(/http:|https:/,'');
 
-                        if($.inArray(script, this.processedScripts) !== -1) {
-                            data = data.replace(list[i],'');
-                        }  else {
+                        data = data.replace(list[i],'');
+                        if($.inArray(script, this.processedScripts) === -1) {
                             scripts.push(script);
                         }
-                    } else {
-                        //try id
-                        scriptArray = list[i].match(ID_PATTERN);
-
-                        if($.inArray(scriptArray[1], this.processedScripts) !== -1) {
-                            data = data.replace(list[i],'');
-                        }  else {
-                            scripts.push(scriptArray[1]);
-                        }
-
                     }
                 }
 
