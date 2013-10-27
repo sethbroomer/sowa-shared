@@ -1,20 +1,21 @@
-        {{> layout/desktop/css}}
-        {{{body}}}
-
-        {{> layout/desktop/javascripts}}
-
-        {{> javascripts/javascripts}}
+            {{{body}}}
 
 
-  {{#if templates}}
-    <script id="templates_{{_app}}">
-        (function () {
-            var template  = Handlebars.template,
-                templates = Handlebars.templates = Handlebars.templates || {};
+            {{#if appJavaScripts}}
+                {{#appJavaScripts}}
+                    {{{javascriptOutputHelper this ../this  }}}
+                {{/appJavaScripts}}
+            {{/if}}
 
-          {{#templates}}
-            templates['{{{name}}}'] = template({{{template}}});
-          {{/templates}}
-        }());
-    </script>
-  {{/if}}
+            {{#if templates}}
+            <script id="templates_{{_folderName}}">
+                (function () {
+                    var template  = Handlebars.template,
+                            templates = Handlebars.templates = Handlebars.templates || {};
+
+                    {{#templates}}
+                        templates['{{{prefix}}}{{{name}}}'] = template({{{template}}});
+                    {{/templates}}
+                }());
+            </script>
+            {{/if}}

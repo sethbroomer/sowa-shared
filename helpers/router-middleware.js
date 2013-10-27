@@ -1,8 +1,11 @@
 'use strict';
 
-var util  = require('util'),
+var path   = require('path'),
     nconf = require('nconf');
 
+var JAVASCRIPT_FOLDER = 'javascript',
+    TEMPLATE_FOLDER   = 'templates',
+    CSS_FOLDER        = 'css';
 
 var addConfigForTemplateObject = function(obj) {
     obj._app = nconf.get('app_name');
@@ -10,29 +13,11 @@ var addConfigForTemplateObject = function(obj) {
     return obj;
 
 };
-var createTemplateArray = function(template, app) {
-    var templates = [];
-
-    // RegExp to remove the ".handlebars" extension from the template names.
-    var extRegex = new RegExp(app.get('hbs').extname + '$');
-
-    Object.keys(template).forEach(function (name) {
-        templates.push({
-            name    : name.replace(extRegex, ''),
-            template: template[name]
-        });
-    });
-
-    return templates;
-}
-
 
 var middleware = {
     exposeJavaScripts: function(req, res, next) {
         var app          = req.app,
-            folderName   = (req.templateFolder ? (req.templateFolder + '/') : '') + 'javascripts',
-            templatePath = util.format('views/partials/%s', folderName );
-
+            templatePath = path.join('views/partials', (req.templateFolder ? req.templateFolder  : '') , JAVASCRIPT_FOLDER);
 
  //      Uses the `ExpressHandlebars` instance to get the precompiled templates.
         app.get('hbs').loadTemplates( templatePath ,{
@@ -58,7 +43,8 @@ var middleware = {
 
     exposeTemplates: function(req, res, next) {
         var app          = req.app,
-            templatePath = util.format('views/partials/%s', (req.templateFolder ? (req.templateFolder + '/') : '') + 'templates'),
+            folderName   = (req.templateFolder ? req.templateFolder  : ''),
+            templatePath = path.join('views/partials', folderName , TEMPLATE_FOLDER),
             that         = this;
 
         // Uses the `ExpressHandlebars` instance to get the precompiled templates.
@@ -68,11 +54,23 @@ var middleware = {
         }, function (err, template) {
             if (err) { return next(err); }
 
-            var templates = createTemplateArray(template, app);
+            var templates = [];
+
+            // RegExp to remove the ".handlebars" extension from the template names.
+            var extRegex = new RegExp(app.get('hbs').extname + '$');
+
+            Object.keys(template).forEach(function (name) {
+                templates.push({
+                    name    : name.replace(extRegex, ''),
+                    prefix  : folderName ? (folderName + '/') : '',
+                    template: template[name]
+                });
+            });
 
             // Exposes the templates during view rendering.
             if (templates.length) {
                 res.locals.templates = templates;
+                res.locals._folderName = folderName;
             }
 
             that.exposeJavaScripts(req, res, next);
@@ -94,8 +92,8 @@ var middleware = {
             render = function() {
 
                 if (args.length < 3 && typeof args[1] === 'function') {
-                    arg[2] = arg[1];
-                    arg[1] = {};
+                    args[2] = args[1];
+                    args[1] = {};
                 }
                 //add configuration varaibles that are needed in the templates
                 args[1] = addConfigForTemplateObject(args[1]);
@@ -103,14 +101,14 @@ var middleware = {
                 //if its a ajax request and we are requesting a tile then use the partial instead of the full tile
                 if(res.req.headers['x-requested-with'] === 'XMLHttpRequest' && res.req.headers['x-request-type'] === 'tile') {
                     res.locals.layout=false;
-                    args[0] = 'templates/'  + args[0];
+                    args[0] = path.join('partials', args[0], TEMPLATE_FOLDER, args[0]);
                 } else if(res.req.headers['x-requested-with'] === 'XMLHttpRequest') {
                     args[1].layout = 'ajax';
                 }
 
                 that.render.apply(that,args);
 
-            }
+            };
 
             req.templateFolder = args[0];
             middleware.exposeTemplates(req, res, render);

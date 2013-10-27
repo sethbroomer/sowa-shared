@@ -18,19 +18,19 @@
         {{/if}}
 
         {{#if templates}}
-            <script id="templates_{{_app}}">
+            <script id="templates_{{_folderName}}">
                 (function () {
                     var template  = Handlebars.template,
                         templates = Handlebars.templates = Handlebars.templates || {};
 
                   {{#templates}}
-                    templates['{{{name}}}'] = template({{{template}}});
+                    templates['{{{prefix}}}{{{name}}}'] = template({{{template}}});
                   {{/templates}}
                 }());
             </script>
         {{/if}}
 
-        <script>
+        <script id="global_inline">
             $( document ).ready(function() {
                 SOWA.ScriptManager.registerScripts();
             });

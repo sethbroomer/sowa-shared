@@ -68,11 +68,11 @@
 
         _loadNewScripts:  function(scripts, data, next) {
             var that       = this;
+//            console.info(data)
 
             if(scripts && scripts.length){
 
                 this._remoteScriptsLoaded = false;
-
                 $LAB
                     .setOptions({AllowDuplicates:false})
                     .script(scripts)
