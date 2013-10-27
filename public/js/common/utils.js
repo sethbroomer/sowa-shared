@@ -26,7 +26,7 @@
         },
         processScripts: function(data, next) {
             //remove any scripts that are currently in the manager
-           var response =  this._removeDuplicateScripts(data);
+            var response =  this._removeDuplicateScripts(data);
 
             this._loadNewScripts(response.scripts, response.data, next);
 

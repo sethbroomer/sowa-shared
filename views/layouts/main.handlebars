@@ -11,27 +11,30 @@
 
         {{> layout/desktop/javascripts}}
 
-        {{> javascripts/javascripts}}
+        {{#if appJavaScripts}}
+            {{#appJavaScripts}}
+                {{{javascriptOutputHelper this ../this  }}}
+            {{/appJavaScripts}}
+        {{/if}}
 
+        {{#if templates}}
+            <script id="templates_{{_app}}">
+                (function () {
+                    var template  = Handlebars.template,
+                        templates = Handlebars.templates = Handlebars.templates || {};
 
-  {{#if templates}}
-    <script id="templates_{{_app}}">
-        (function () {
-            var template  = Handlebars.template,
-                templates = Handlebars.templates = Handlebars.templates || {};
+                  {{#templates}}
+                    templates['{{{name}}}'] = template({{{template}}});
+                  {{/templates}}
+                }());
+            </script>
+        {{/if}}
 
-          {{#templates}}
-            templates['{{{name}}}'] = template({{{template}}});
-          {{/templates}}
-        }());
-    </script>
-  {{/if}}
-
-    <script>
-        $( document ).ready(function() {
-            SOWA.ScriptManager.registerScripts();
-        });
-    </script>
+        <script>
+            $( document ).ready(function() {
+                SOWA.ScriptManager.registerScripts();
+            });
+        </script>
 
     </body>
 </html>

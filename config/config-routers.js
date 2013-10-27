@@ -1,12 +1,12 @@
 "use strict";
 
 var fs         = require('fs'),
-    baseRouter = require('./../helpers/router-middleware.js');
+    baseRouter = require('./../helpers/router-middleware');
 
 
 var defaultRouters = function(app) {
 
-    app.get('/*', baseRouter.extendExpress3HandlebarRender, baseRouter.exposeTemplates, function(req,res,next){
+    app.get('/*', baseRouter.extendExpress3HandlebarRender,  function(req,res,next){
         if(res.req.headers['x-requested-with'] === 'XMLHttpRequest') {
             res.locals.responseType = 'json';
 
