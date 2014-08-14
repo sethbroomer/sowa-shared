@@ -33,6 +33,9 @@ var configureViewApp = function(app) {
         }
     });
 
+    require('../helpers/handlebar-helpers').register(hbs.handlebars, {});
+
+
     app.set('hbs',hbs);
 
     app.engine('handlebars', hbs.engine);

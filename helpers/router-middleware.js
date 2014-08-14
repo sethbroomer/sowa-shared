@@ -10,6 +10,7 @@ var JAVASCRIPT_FOLDER = 'javascript',
 var addConfigForTemplateObject = function(obj) {
     obj._app = nconf.get('app_name');
     obj._staticUrl = nconf.get('static_url');
+    obj._version = nconf.get('version') || '';
     return obj;
 
 };
