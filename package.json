@@ -4,25 +4,35 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "express": "3.4.0",
-        "underscore": "1.5.2",
-        "express3-handlebars": "0.5.0",
-        "request" : "2.27.0",
-        "backbone": "1.1.0",
-        "nconf": "0.6.7",
-        "log4js": "0.6.9"
+        "express": "4.8.3",
+        "underscore": "1.6.0",
+        "express-handlebars": "1.0.1",
+        "request" : "2.40.0",
+        "backbone": "1.1.2",
+        "nconf": "0.6.9",
+        "log4js": "0.6.16"
     },
     "devDependencies": {
         "mocha": "*",
-        "should": "*",
+        "benchmark": "1.0.0",
         "colors": "*",
-        "grunt": "~0.4.1",
-        "grunt-contrib-jshint": "~0.6.4",
+        "grunt": "~0.4.5",
+        "grunt-cafe-mocha": "~0.1.12",
+        "grunt-contrib-jshint": "~0.10.0",
+        "grunt-contrib-watch": "~0.6.1",
+        "grunt-handlebars-compiler": "~0.0.7",
+        "grunt-newer": "^0.7.0",
+        "grunt-template-jasmine-istanbul": "~0.3.0",
+        "install": "^0.1.7",
+        "load-grunt-config": "^0.13.0",
+        "load-grunt-tasks": "^0.6.0",
+        "npm": "^1.4.23",
+        "time-grunt": "^0.4.0",
         "grunt-cafe-mocha": "~0.1.9"
     },
     "engines": {
         "node": "0.10.x",
-        "npm": "1.2.x"
+        "npm": "1.4.x"
     },
     "main": "index.js",
     "repository": {
